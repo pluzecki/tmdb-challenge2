@@ -1,5 +1,5 @@
 import {Router} from "wpe-lightning-sdk";
-import {getMovies} from './Api';
+import {getMovies} from './api';
 
 /**
  *  bind a data request to a specific route, before a page load
