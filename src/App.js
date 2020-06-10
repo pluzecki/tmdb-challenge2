@@ -13,8 +13,6 @@ export default class App extends Lightning.Component {
         ];
     }
 
-    // when App instance is initialized we call the routes
-    // this will setup all pages and attach them to there route
     _setup() {
         initApi(this.stage);
         Router.startRouter({
@@ -83,5 +81,9 @@ export default class App extends Lightning.Component {
     _getFocused() {
         return Router.getActivePage();
     }
+
+    // _init() {
+    //     Router.navigate("movies");
+    // }
 
 }

@@ -1,10 +1,11 @@
 import {Lightning} from "wpe-lightning-sdk";
+import { Item } from '..';
 
 export default class List extends Lightning.Component {
     static _template() {
         return {
             Label: {
-                text: {text: '', fontFace: 'Magra'}
+                text: {text: '', fontFace: 'SourceSansPro-Regular'}
             },
             Movies: {
                 y: 75
@@ -17,6 +18,7 @@ export default class List extends Lightning.Component {
     }
 
     _handleLeft() {
+        console.log('space');
         // @todo: update index and call setIndex
     }
 
@@ -38,12 +40,11 @@ export default class List extends Lightning.Component {
     }
 
     set movies(v) {
-        // we add an array of object with type: Item
-        // this.tag("Levels").children = v.map((el, idx)=>{
-        //     return {
-        //         type: Item
-        //     };
-        // });
+        this.tag("Movies").children = v.map((el, idx)=>{
+            return {
+                type: Item, item: el, x: 200 * idx,
+            };
+        });
     }
 
     get items() {
@@ -54,8 +55,8 @@ export default class List extends Lightning.Component {
         // @todo: return selected item
     }
 
-    _getFocused() {
-        // @todo:
-        // return activeItem
-    }
+    // _getFocused() {
+    //     // @todo:
+    //     // return activeItem
+    // }
 }
