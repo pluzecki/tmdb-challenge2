@@ -17,10 +17,23 @@ export default class Level extends Lightning.Component{
         }
     }
 
-    /**
-     * @todo:
-     * - toggle alpha on focus / unfocus (transition)
-     */
+    _focus() {
+        this.patch({
+            smooth: { 
+                alpha: [1, { duration: 0.5 }], 
+                scale: [1.05, { duration: 0.5 }],
+            }
+        });
+    }
+
+    _unfocus() {
+        this.patch({
+            smooth: { 
+                alpha: [0.5, { duration: 0.5 }], 
+                scale: [1, { duration: 0.5 }],
+            }
+        });
+    }
 
     set item(v){
         this.patch({
@@ -34,7 +47,7 @@ export default class Level extends Lightning.Component{
             }
         });
         this.tag("Image").on("txLoaded", ()=> {
-            this.setSmooth("alpha", 1, { duration: 5});
+            this.setSmooth("alpha", 0.2, { duration: 1});
         });
     }
 }

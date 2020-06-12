@@ -81,9 +81,4 @@ export default class App extends Lightning.Component {
     _getFocused() {
         return Router.getActivePage();
     }
-
-    // _init() {
-    //     Router.navigate("movies");
-    // }
-
 }

@@ -32,7 +32,9 @@ export default class Main extends Lightning.Component{
                 smooth: { scale: 1 },
                 Logo: { smooth: { alpha: 1, y: 140, }},
             })
-        })
+        });
+
+        this._refocus();
     }
 
     _focus() {
@@ -40,9 +42,6 @@ export default class Main extends Lightning.Component{
     }
 
     set movies(movies) {
-        // this.tag('Lists').children = [
-        //     {type: List, movies: movies}
-        // ];
         this.tag('Lists').patch({
             List: { type: List, movies: movies },
         });
@@ -54,9 +53,5 @@ export default class Main extends Lightning.Component{
 
     _getFocused() {
         return this.tag('Lists.List');
-    }
-
-    _handleSpace() {
-        console.log('space2');
     }
 }

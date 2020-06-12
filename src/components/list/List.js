@@ -8,6 +8,7 @@ export default class List extends Lightning.Component {
                 text: {text: '', fontFace: 'SourceSansPro-Regular'}
             },
             Movies: {
+                x: 0,
                 y: 75
             }
         }
@@ -15,24 +16,28 @@ export default class List extends Lightning.Component {
 
     _init() {
         this._index = 0;
+        this._refocus();
     }
 
     _handleLeft() {
-        console.log('space');
-        // @todo: update index and call setIndex
+        if (this._index <= 0) return;
+
+        this.setIndex(this._index-1);
     }
 
     _handleRight() {
-        // @todo: update index and call setIndex
+        if (this._index >= (this._movies.length - 1)) return;
+
+        this.setIndex(this._index+1);
     }
 
     setIndex(index) {
-        /**
-         * @todo:
-         * Implement working setIndex method
-         * that stores index and position movie component to focus
-         * on selected item
-         */
+        this._index = index;
+        this.patch({
+            smooth: {
+                x: [-200 * this._index, { duration: 0.5 } ]
+            },
+        });
     }
 
     set label(v) {
@@ -40,23 +45,24 @@ export default class List extends Lightning.Component {
     }
 
     set movies(v) {
+        this._movies = v;
         this.tag("Movies").children = v.map((el, idx)=>{
             return {
                 type: Item, item: el, x: 200 * idx,
             };
         });
+        this._refocus();
     }
 
     get items() {
-        return this.tag("Levels").children;
+        return this.tag("Movies").children;
     }
 
     get activeItem() {
-        // @todo: return selected item
+        return this.items[this._index];
     }
 
-    // _getFocused() {
-    //     // @todo:
-    //     // return activeItem
-    // }
+    _getFocused() {
+        return this.activeItem || false;
+    }
 }
